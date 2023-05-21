@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>WEBMED</title>
+    <%- include('partials/head.html') %>
+    <style>
+        h1 {
+          text-align: center;
+        }
+    
+        .comment {
+          margin-bottom: 20px;
+          padding: 10px;
+          border: 1px solid #0033ff;
+          border-radius: 5px;
+        }
+    
+        .comment h3 {
+          margin: 0 0 5px 0;
+        }
+    
+        .comment p {
+          margin: 0;
+        }
+    
+        .stars {
+          display: inline-block;
+          vertical-align: middle;
+          color: gold;
+        }
+
+        button {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        }
+      </style>
+</head>
+<body>
+    <%- include('partials/navegacion.html') %>
+    <h1>Comentarios</h1>
+
+  <div class="comment">
+    <h3>Lina Poveda</h3>
+    <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+    <p>¡Excelente experiencia! El servicio fue rápido y el personal muy amable. Definitivamente recomendaría este lugar.</p>
+  </div>
+
+  <div class="comment">
+    <h3>Luis Bernal</h3>
+    <div class="stars">&#9733;&#9733;&#9733;&#9733;</div>
+    <p>Buena atención y precios razonables. Sin embargo, el tiempo de espera fue un poco largo.</p>
+  </div>
+
+  <h2>Dejar un Comentario</h2>
+
+  <form>
+    <label for="name">Nombre:</label>
+    <input type="text" id="name" name="name" required><br>
+
+    <label for="rating">Calificación:</label>
+    <select id="rating" name="rating" required>
+      <option value="5">&#9733;&#9733;&#9733;&#9733;&#9733;</option>
+      <option value="4">&#9733;&#9733;&#9733;&#9733;</option>
+      <option value="3">&#9733;&#9733;&#9733;</option>
+      <option value="2">&#9733;&#9733;</option>
+      <option value="1">&#9733;</option>
+      <option value="1"></option>
+    </select><br>
+
+    <label for="comment">Comentario:</label><br>
+    <textarea id="comment" name="comment" rows="4" cols="50" required></textarea><br>
+
+    <button type="submit">Enviar Comentario</button>
+  </form>
+  <%- include('partials/footer.html') %>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>WEBMED</title>
+    <%- include('partials/head.html') %>
+    <style>
+      body {
+        text-align: center;
+      }
+      h1 {
+        color: #0033ff;
+      }
+      p {
+        margin-bottom: 20px;
+      }
+      .search-form {
+        margin: 20px auto;
+        max-width: 400px;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+      }
+      .search-form h2 {
+        color: #0033ff;
+      }
+      .search-form p {
+        margin-bottom: 10px;
+      }
+      .search-form label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        text-align: left;
+      }
+      .search-form input[type="text"] {
+        width: 100%;
+        padding: 5px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      .search-form button {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .search-results {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+      }
+      .search-results h2 {
+        color: #0033ff;
+      }
+      .search-results p {
+        margin-bottom: 10px;
+        text-align: left;
+      }
+    </style>
+</head>
+<body>
+    <%- include('partials/navegacion.html') %>
+    <h1>Salud A-Z</h1>
+
+  <div class="search-form">
+    <h2>Buscar Enfermedad</h2>
+    <form id="searchForm">
+      <label for="disease">Nombre de la Enfermedad:</label>
+      <input type="text" id="disease" name="disease" placeholder="Ingresa el nombre de la enfermedad">
+
+      <button type="submit">Buscar</button>
+    </form>
+  </div>
+
+  <div class="search-results" id="searchResults">
+    <h2>Resultado de la Búsqueda</h2>
+    <p>La información sobre la enfermedad se mostrará aquí.</p>
+  </div>
+
+  <script>
+    // Enfermedades, tratamientos y prevenciones
+    const enfermedades = [
+      {
+        nombre: "Gripe",
+        descripcion: "La gripe es una enfermedad viral que afecta principalmente las vías respiratorias.",
+        tratamiento: "El tratamiento para la gripe generalmente incluye descanso, hidratación adecuada y medicamentos para aliviar los síntomas como fiebre y congestión nasal.",
+        prevencion: "La prevención de la gripe se logra mediante la vacunación anual, lavado de manos frecuente y evitar el contacto cercano con personas enfermas."
+      },
+      {
+        nombre: "Hipertensión",
+        descripcion: "La hipertensión es una condición en la cual la presión arterial en las arterias es crónicamente alta.",
+        tratamiento: "El tratamiento de la hipertensión a menudo implica cambios en el estilo de vida, como una dieta saludable y ejercicio regular, así como medicamentos recetados por un médico.",
+        prevencion: "Para prevenir la hipertensión, es importante mantener un estilo de vida saludable que incluya una dieta equilibrada, ejercicio regular, limitar la ingesta de sal y alcohol, y evitar el tabaco."
+      },
+      {
+        nombre: "Asma",
+        descripcion: "El asma es una enfermedad crónica que afecta las vías respiratorias y provoca dificultad para respirar.",
+        tratamiento: "El tratamiento del asma puede incluir medicamentos inhalados para controlar los síntomas, evitar desencadenantes conocidos y llevar un plan de acción para el manejo de las crisis.",
+        prevencion: "No existe una forma de prevención conocida para el asma, pero se pueden tomar medidas para evitar los desencadenantes conocidos, como alérgenos y contaminantes del aire."
+      },
+      {
+        nombre: "Artritis",
+        descripcion: "La artritis es una enfermedad que causa inflamación y dolor en las articulaciones.",
+        tratamiento: "El tratamiento de la artritis puede incluir medicamentos para reducir el dolor y la inflamación, terapia física y ocupacional, y en algunos casos, cirugía.",
+        prevencion: "No se conoce una forma de prevención para la artritis, pero se pueden tomar medidas para reducir el riesgo, como mantener un peso saludable, hacer ejercicio regularmente y evitar lesiones en las articulaciones."
+      },
+      {
+        nombre: "Depresión",
+        descripcion: "La depresión es un trastorno del estado de ánimo que provoca sentimientos persistentes de tristeza y pérdida de interés en las actividades diarias.",
+        tratamiento: "El tratamiento de la depresión puede incluir terapia psicoterapéutica, medicamentos antidepresivos y cambios en el estilo de vida, como ejercicio regular y apoyo social.",
+        prevencion: "No hay una forma específica de prevención para la depresión, pero mantener un estilo de vida saludable, buscar apoyo emocional y manejar el estrés pueden ayudar a reducir el riesgo."
+      },
+      {
+        nombre: "Cáncer",
+        descripcion: "El cáncer es una enfermedad caracterizada por el crecimiento anormal y descontrolado de células en el cuerpo.",
+        tratamiento: "El tratamiento del cáncer depende del tipo y etapa de la enfermedad, e incluye opciones como cirugía, radioterapia, quimioterapia, inmunoterapia y terapias dirigidas.",
+        prevencion: "La prevención del cáncer implica llevar un estilo de vida saludable, como no fumar, mantener un peso saludable, hacer ejercicio regularmente y someterse a exámenes de detección periódicos."
+      }
+    ];
+
+    // Función para buscar la enfermedad y mostrar los resultados
+    function buscarEnfermedad(event) {
+      event.preventDefault();
+      const input = document.getElementById("disease");
+      const searchTerm = input.value.toLowerCase();
+
+      const resultsContainer = document.getElementById("searchResults");
+      resultsContainer.innerHTML = "";
+
+      const enfermedad = enfermedades.find(enf => enf.nombre.toLowerCase() === searchTerm);
+
+      if (enfermedad) {
+        const h2 = document.createElement("h2");
+        h2.textContent = enfermedad.nombre;
+        resultsContainer.appendChild(h2);
+
+        const descripcionP = document.createElement("p");
+        descripcionP.textContent = "Descripción: " + enfermedad.descripcion;
+        resultsContainer.appendChild(descripcionP);
+
+        const tratamientoP = document.createElement("p");
+        tratamientoP.textContent = "Tratamiento: " + enfermedad.tratamiento;
+        resultsContainer.appendChild(tratamientoP);
+
+        const prevencionP = document.createElement("p");
+        prevencionP.textContent = "Prevención: " + enfermedad.prevencion;
+        resultsContainer.appendChild(prevencionP);
+      } else {
+        const noResultsP = document.createElement("p");
+        noResultsP.textContent = "No se encontraron resultados para la enfermedad ingresada.";
+        resultsContainer.appendChild(noResultsP);
+      }
+
+      input.value = "";
+    }
+
+    // Agregar evento de submit al formulario de búsqueda
+    const searchForm = document.getElementById("searchForm");
+    searchForm.addEventListener("submit", buscarEnfermedad);
+  </script>
+  <%- include('partials/footer.html') %>
+</body>
+</html>

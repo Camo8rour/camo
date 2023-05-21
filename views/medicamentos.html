@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>WEBMED</title>
+    <%- include('partials/head.html') %>
+    <style>
+      h1 {
+        text-align: center;
+      }
+  
+      .search-form {
+        margin-bottom: 20px;
+      }
+  
+      .search-form h2 {
+        margin-top: 0;
+      }
+  
+      .search-form form {
+        display: flex;
+        align-items: center;
+      }
+  
+      .search-form label {
+        margin-right: 20px;
+      }
+  
+      .search-form input[type="text"] {
+        padding: 5px 40px;
+        font-size: 15px;
+      }
+  
+      .search-form button {
+        padding: 5px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+  
+      .search-results {
+        margin-bottom: 20px;
+      }
+  
+      .result {
+        margin-bottom: 10px;
+        border: 1px solid #0033ff;
+        border-radius: 5px;
+        padding: 10px;
+      }
+  
+      .result h3 {
+        margin-top: 0;
+      }
+  
+      .result p {
+        margin-bottom: 5px;
+      }
+  
+      .result button {
+        padding: 5px 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+  
+      .result button:hover {
+        background-color: #45a049;
+      }
+    </style>
+</head>
+<body>
+    <%- include('partials/navegacion.html') %>
+    <h1>Medicamentos y Suplementos</h1>
+
+  <div class="search-form">
+    <h2>Buscar Medicamento o Suplemento</h2>
+    <form id="searchForm">
+      <label for="medicine">Nombre del Medicamento:</label>
+      <input type="text" id="medicine" name="medicine" placeholder="Ingresa el nombre:">
+
+      <button type="submit">Buscar</button>
+    </form>
+  </div>
+
+  <div class="search-results" id="searchResults">
+    <h2>Resultado de la Búsqueda</h2>
+    <p>La información sobre el medicamento se mostrará aquí.</p>
+  </div>
+
+  <script>
+    const medicamentos = [
+      {
+        nombre: "Paracetamol",
+        descripcion: "El paracetamol es un medicamento analgésico y antipirético utilizado para aliviar el dolor y reducir la fiebre.",
+        dosis: "500 mg",
+        costo: 5,
+        disponibles: 10
+      },
+      {
+        nombre: "Ibuprofeno",
+        descripcion: "El ibuprofeno es un medicamento antiinflamatorio no esteroideo utilizado para aliviar el dolor, reducir la inflamación y bajar la fiebre.",
+        dosis: "400 mg",
+        costo: 8,
+        disponibles: 15
+      },
+      {
+        nombre: "Amoxicilina",
+        descripcion: "La amoxicilina es un antibiótico utilizado para tratar infecciones bacterianas.",
+        dosis: "500 mg",
+        costo: 1,
+        disponibles: 8
+      },
+      {
+        nombre: "Loratadina",
+        descripcion: "La loratadina es un antihistamínico utilizado para aliviar los síntomas de las alergias, como la congestión nasal y la picazón en los ojos.",
+        dosis: "10 mg",
+        costo: 6,
+        disponibles: 20
+      },
+      {
+        nombre: "Omeprazol",
+        descripcion: "El omeprazol es un medicamento inhibidor de la bomba de protones utilizado para reducir la producción de ácido en el estómago y tratar problemas como el reflujo ácido y las úlceras.",
+        dosis: "20 mg",
+        costo: 7,
+        disponibles: 12
+      },
+      {
+        nombre: "Aspirina",
+        descripcion: "La aspirina es un medicamento antiinflamatorio, analgésico y antipirético utilizado para aliviar el dolor, reducir la inflamación y bajar la fiebre.",
+        dosis: "325 mg",
+        costo: 4,
+        disponibles: 25
+      },
+      {
+        nombre: "Vitamina D",
+        descripcion: "La vitamina D es un suplemento nutricional utilizado para fortalecer los huesos, regular el sistema inmunológico y mantener la salud general.",
+        dosis: "1000 UI",
+        costo: 12,
+        disponibles: 5
+      },
+      {
+        nombre: "Acetaminofen",
+        descripcion: "El acetaminofen es un medicamento analgésico y antipirético utilizado para aliviar el dolor y reducir la fiebre.",
+        dosis: "500 mg",
+        costo: 6,
+        disponibles: 10
+      }
+    ];
+
+    const searchForm = document.getElementById("searchForm");
+    const searchResults = document.getElementById("searchResults");
+
+    function buscarMedicamento(event) {
+      event.preventDefault();
+
+      const input = document.getElementById("medicine");
+      const searchTerm = input.value.toLowerCase();
+
+      searchResults.innerHTML = "";
+
+      const medicamento = medicamentos.find(med => med.nombre.toLowerCase() === searchTerm);
+
+      if (medicamento) {
+        const resultDiv = document.createElement("div");
+        resultDiv.classList.add("result");
+
+        const nameH3 = document.createElement("h3");
+        nameH3.textContent = medicamento.nombre;
+        resultDiv.appendChild(nameH3);
+
+        const descriptionP = document.createElement("p");
+        descriptionP.textContent = "Descripción: " + medicamento.descripcion;
+        resultDiv.appendChild(descriptionP);
+
+        const doseP = document.createElement("p");
+        doseP.textContent = "Dosis: " + medicamento.dosis;
+        resultDiv.appendChild(doseP);
+
+        const costP = document.createElement("p");
+        costP.textContent = "Costo: $" + medicamento.costo.toFixed(3);
+        resultDiv.appendChild(costP);
+
+        const disponiblesP = document.createElement("p");
+        disponiblesP.textContent = "Disponibles: " + medicamento.disponibles;
+        resultDiv.appendChild(disponiblesP);
+
+        const comprarBtn = document.createElement("button");
+        comprarBtn.textContent = "Comprar";
+        comprarBtn.addEventListener("click", () => {
+          if (medicamento.disponibles > 0) {
+            medicamento.disponibles--;
+            disponiblesP.textContent = "Disponibles: " + medicamento.disponibles;
+            alert("¡Compra exitosa! Se ha restado 1 medicamento de los disponibles.");
+          } else {
+            alert("Lo sentimos, no hay medicamentos disponibles en este momento.");
+          }
+        });
+        resultDiv.appendChild(comprarBtn);
+
+        searchResults.appendChild(resultDiv);
+      } else {
+        const noResultsP = document.createElement("p");
+        noResultsP.textContent = "No se encontraron resultados para el medicamento ingresado.";
+        searchResults.appendChild(noResultsP);
+      }
+
+      input.value = "";
+    }
+
+    searchForm.addEventListener("submit", buscarMedicamento);
+  </script>
+  <%- include('partials/footer.html') %>
+</body>
+</html>

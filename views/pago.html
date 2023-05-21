@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>WEBMED</title>
+    <%- include('partials/head.html') %>
+    <style>
+        h1 {
+          text-align: center;
+        }
+    
+        form {
+          max-width: 400px;
+          margin: 0 auto;
+        }
+    
+        form div {
+          margin-bottom: 10px;
+        }
+    
+        label {
+          display: block;
+          font-weight: bold;
+        }
+    
+        select, input[type="text"] {
+          padding: 5px;
+          font-size: 16px;
+          width: 100%;
+          box-sizing: border-box;
+        }
+    
+        button[type="submit"] {
+          padding: 5px 10px;
+          background-color: #4CAF50;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+    
+        button[type="submit"]:hover {
+          background-color: #45a049;
+        }
+      </style>
+</head>
+<body>
+    <%- include('partials/navegacion.html') %>
+    <h1>Pago</h1>
+
+  <form id="paymentForm">
+    <div>
+      <label for="service">Servicio:</label>
+      <select id="service" name="service">
+        <option value="Consulta médica">Consulta médica</option>
+        <option value="Acetaminofen">Acetaminofen</option>
+        <option value="Vitamina D">Vitamina D</option>
+        <option value="Aspirina">Aspirina</option>
+        <option value="Omeprazol">Omeprazol</option>
+        <option value="Loratadina">Loratadina</option>
+        <option value="Amoxicilina">Amoxicilina</option>
+        <option value="Ibuprofeno">Ibuprofeno</option>
+        <option value="Paracetamol">Paracetamol</option>
+        <option value="Seguro de salud">Seguro de salud</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="cost">Costo:</label>
+      <input type="text" id="cost" name="cost" readonly>
+    </div>
+
+    <div>
+      <label for="paymentMethod">Método de Pago:</label>
+      <select id="paymentMethod" name="paymentMethod">
+        <option value="Tarjeta de Crédito">Tarjeta de Crédito</option>
+        <option value="Transferencia Bancaria">Transferencia Bancaria</option>
+        <option value="Pago en Efectivo">Pago en Efectivo</option>
+      </select>
+    </div>
+
+    <div>
+        <label for="accountNumber">Número de Cuenta:</label>
+        <input type="text" id="accountNumber" name="accountNumber">
+    </div>
+
+    <button type="submit">Realizar Pago</button>
+  </form>
+
+  <script>
+    const serviceSelect = document.getElementById("service");
+    const costInput = document.getElementById("cost");
+
+    serviceSelect.addEventListener("change", () => {
+      const selectedService = serviceSelect.value;
+      let cost;
+
+      switch (selectedService) {
+        case "Consulta médica":
+          cost = 50;
+          break;
+        case "Acetaminofen":
+          cost = 6;
+          break;
+        case "Vitamina D":
+          cost = 12;
+          break;
+        case "Aspirina":
+          cost = 4;
+          break;
+        case "Omeprazol":
+          cost = 7;
+          break;
+        case "Loratadina":
+          cost = 6;
+          break;
+        case "Amoxicilina":
+          cost = 1;
+          break;
+        case "Ibuprofeno":
+          cost = 8;
+          break;
+        case "Paracetamol":
+          cost = 5;
+          break;
+        case "Seguro de salud":
+          cost = 100;
+          break;
+        default:
+          cost = 0;
+          break;
+      }
+
+      costInput.value = "$" + cost.toFixed(3);
+    });
+
+    const paymentForm = document.getElementById("paymentForm");
+    paymentForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const service = serviceSelect.value;
+      const cost = costInput.value;
+      const paymentMethod = document.getElementById("paymentMethod").value;
+      const accountNumber = document.getElementById("accountNumber").value;
+
+      // Aquí puedes agregar la lógica para procesar el pago según el método seleccionado
+
+      alert(`¡Pago realizado!\n\nServicio: ${service}\nCosto: ${cost}\nMétodo de Pago: ${paymentMethod}\nNúmero de Cuenta: ${accountNumber}`);
+    });
+  </script>
+  <%- include('partials/footer.html') %>
+</body>
+</html>

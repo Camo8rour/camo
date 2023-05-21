@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>WEBMED</title>
+    <%- include('partials/head.html') %>
+    <style>
+        h1 {
+          text-align: center;
+        }
+    
+        .search-form {
+          margin-bottom: 20px;
+        }
+    
+        label {
+          display: block;
+          font-weight: bold;
+        }
+    
+        input[type="text"] {
+          padding: 5px;
+          font-size: 16px;
+          width: 100%;
+          box-sizing: border-box;
+        }
+    
+        button[type="submit"] {
+          padding: 5px 10px;
+          background-color: #4CAF50;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+    
+        button[type="submit"]:hover {
+          background-color: #45a049;
+        }
+    
+        .search-results {
+          max-width: 400px;
+          margin: 0 auto;
+        }
+    
+        .result {
+          margin-bottom: 10px;
+          padding: 10px;
+          border: 1px solid #0033ff;
+          border-radius: 5px;
+        }
+    
+        .result h3 {
+          margin-top: 0;
+        }
+    
+        .result p {
+          margin-bottom: 5px;
+        }
+    
+        .total-cost {
+          font-weight: bold;
+        }
+      </style>
+</head>
+<body>
+    <%- include('partials/navegacion.html') %>
+    <h1>Finanzas</h1>
+
+    <div class="search-form">
+      <h2>Buscar Servicio</h2>
+      <form id="searchForm">
+        <label for="service">Nombre del Servicio:</label>
+        <input type="text" id="service" name="service" placeholder="Ingresa el nombre del servicio">
+  
+        <button type="submit">Buscar</button>
+      </form>
+    </div>
+  
+    <div class="search-results" id="searchResults">
+      <h2>Resultado de la Búsqueda</h2>
+      <p>La información sobre el servicio se mostrará aquí.</p>
+    </div>
+  
+    <div class="total-cost">
+      <h2>Costo Total de los Servicios Utilizados</h2>
+      <p id="totalCost">0</p>
+    </div>
+  
+    <script>
+      const services = [
+        {
+          nombre: "Consulta General",
+          costo: 50
+        },
+        {
+          nombre: "Acetaminofen",
+          costo: 6
+        },
+        {
+          nombre: "Vitamina D",
+          costo: 12
+        },
+        {
+          nombre: "Aspirina",
+          costo: 4
+        },
+        {
+          nombre: "Omeprazol",
+          costo: 7
+        },
+        {
+          nombre: "Loratadina",
+          costo: 6
+        },
+        {
+          nombre: "Amoxicilina",
+          costo: 1
+        },
+        {
+          nombre: "Ibuprofeno",
+          costo: 8
+        },
+        {
+          nombre: "Paracetamol",
+          costo: 5
+        },
+        {
+          nombre: "Seguro de salud",
+          costo: 100
+        },
+
+      ];
+  
+      const searchForm = document.getElementById("searchForm");
+      const searchResults = document.getElementById("searchResults");
+      const totalCost = document.getElementById("totalCost");
+      let costTotal = 0;
+  
+      function buscarServicio(event) {
+        event.preventDefault();
+  
+        const input = document.getElementById("service");
+        const searchTerm = input.value.toLowerCase();
+  
+        searchResults.innerHTML = "";
+  
+        const servicio = services.find(serv => serv.nombre.toLowerCase() === searchTerm);
+  
+        if (servicio) {
+          const resultDiv = document.createElement("div");
+          resultDiv.classList.add("result");
+  
+          const nameH3 = document.createElement("h3");
+          nameH3.textContent = servicio.nombre;
+          resultDiv.appendChild(nameH3);
+  
+          const costP = document.createElement("p");
+          costP.textContent = "Costo: $" + servicio.costo.toFixed(3);
+          resultDiv.appendChild(costP);
+  
+          searchResults.appendChild(resultDiv);
+  
+          costTotal += servicio.costo;
+          totalCost.textContent = "$" + costTotal.toFixed(2);
+        } else {
+          const noResultsP = document.createElement("p");
+          noResultsP.textContent = "No se encontraron resultados para el servicio buscado.";
+          searchResults.appendChild(noResultsP);
+        }
+  
+        input.value = "";
+      }
+  
+      searchForm.addEventListener("submit", buscarServicio);
+    </script>
+    <%- include('partials/footer.html') %>
+</body>
+</html>

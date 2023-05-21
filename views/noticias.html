@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>WEBMED</title>
+    <%- include('partials/head.html') %>
+    <style>
+        h1 {
+          text-align: center;
+        }
+    
+        h2 {
+          margin-top: 30px;
+        }
+    
+        .article {
+          margin-bottom: 20px;
+          padding: 10px;
+          border: 1px solid #0033ff;
+          border-radius: 5px;
+        }
+    
+        .article h3 {
+          margin-top: 0;
+        }
+    
+        .article p {
+          margin-bottom: 5px;
+        }
+      </style>
+</head>
+<body>
+    <%- include('partials/navegacion.html') %>
+    <h1>Noticias y Expertos</h1>
+
+  <h2>Noticias</h2>
+
+  <div class="article">
+    <h3>Descubren una nueva vacuna contra la gripe</h3>
+    <p>Un grupo de científicos ha desarrollado una vacuna revolucionaria que proporciona una mayor protección contra la gripe estacional. Los ensayos clínicos han mostrado una efectividad del 95% en la prevención de la enfermedad. Esta vacuna podría marcar un hito en la lucha contra la gripe y reducir su impacto en la población.</p>
+    <p>Fecha: 15 de abril de 2023</p>
+  </div>
+
+  <div class="article">
+    <h3>Los beneficios del ejercicio para la salud mental</h3>
+    <p>Un estudio reciente ha demostrado que realizar ejercicio regularmente no solo tiene beneficios para la salud física, sino también para la salud mental. La actividad física ayuda a reducir el estrés, mejorar el estado de ánimo y prevenir enfermedades mentales como la depresión y la ansiedad. Estos hallazgos resaltan la importancia de incluir el ejercicio en nuestra rutina diaria.</p>
+    <p>Fecha: 10 de mayo de 2023</p>
+  </div>
+
+  <h2>Expertos</h2>
+
+  <div class="article">
+    <h3>Dr. Carlos Pérez</h3>
+    <p>Especialidad: Cardiología</p>
+    <p>El Dr. Carlos Pérez es un reconocido cardiólogo con más de 20 años de experiencia en el tratamiento de enfermedades cardiovasculares. Ha realizado investigaciones innovadoras en el campo de la prevención de enfermedades del corazón y ha publicado numerosos artículos científicos. Su dedicación y conocimiento lo convierten en un referente en el área de la cardiología.</p>
+  </div>
+
+  <div class="article">
+    <h3>Dra. Ana Torres</h3>
+    <p>Especialidad: Pediatría</p>
+    <p>La Dra. Ana Torres es una destacada pediatra comprometida con el cuidado de la salud infantil. Su enfoque se centra en proporcionar atención integral a los niños y promover estilos de vida saludables desde una edad temprana. Con su calidez y experiencia, la Dra. Ana Torres se ha convertido en una figura confiable para padres y niños por igual.</p>
+  </div>
+  <%- include('partials/footer.html') %>
+</body>
+</html>

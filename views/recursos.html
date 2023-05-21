@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>WEBMED</title>
+    <%- include('partials/head.html') %>
+    <style>
+      h1 {
+        text-align: center;
+        color: #0033ff;
+      }
+      img {
+        display: block;
+        margin: 0 auto;
+        width: 200px;
+        border-radius: 50%;
+      }
+      p {
+        margin-bottom: 20px;
+      }
+    </style>
+</head>
+<body>
+    <div class="col-lg-12 text-center">
+        <header class="header">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+              <div class="container">
+                <link rel="stylesheet" href="/src/public/css/estilo.css">
+                <a class="navbar-brand" href="/recu"><h1 class="fs-3">Recursos</h1></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+        
+                <div class="justify-content-end collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav mb-2 mb-lg-0">
+                    <li class="nav-item">
+                      <a class="nav-link active" href="/verificador"><span class="fa-user-alt"></span> Verificador De Sintomas</a>
+                      </li>
+                    <li class="nav-item">
+                      <a class="nav-link active" href="/calculadora"><span class="fas fa-user-alt "></span> Calculadora De Salud</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link active" href="/medicos"><span class="fas fa-user-alt "></span> Encontrar Un Medico</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link active" href="/seguros"><span class="fas fa-user-alt "></span> Guia De Seguros</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link active" href="/ambulancia.html"><span class="fas fa-user-alt "></span> Servicio De Ambulancia</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </nav>
+        </header>
+    </div>
+
+    <h1>Recursos</h1>
+
+    <div class="resource">
+      <h2>Verificador de Síntomas</h2>
+      <p>El verificador de síntomas es una herramienta que le permite ingresar sus síntomas y obtener posibles enfermedades asociadas. Le proporciona información inicial para que pueda entender mejor su condición de salud.</p>
+    </div>
+
+    <div class="resource">
+      <h2>Calculadora de Salud</h2>
+      <p>La calculadora de salud le permite calcular su índice de masa corporal (IMC) para evaluar su peso y determinar si se encuentra en un rango saludable. Solo necesita ingresar su altura y peso para obtener el resultado.</p>
+    </div>
+
+    <div class="resource">
+      <h2>Encontrar un Médico</h2>
+      <p>El servicio de encontrar un médico le ayuda a buscar y encontrar médicos especialistas en diversas áreas de atención médica. Puede buscar por especialidad, ubicación y otros criterios para encontrar el médico adecuado para sus necesidades.</p>
+    </div>
+
+    <div class="resource">
+      <h2>Guía de Seguros</h2>
+      <p>La guía de seguros proporciona información detallada sobre los diferentes tipos de seguros médicos disponibles, incluyendo sus coberturas, beneficios y opciones. Le ayuda a comprender y elegir el seguro adecuado para usted y su familia.</p>
+    </div>
+
+    <div class="resource">
+      <h2>Servicio de Ambulancia</h2>
+      <p>El servicio de ambulancia del hospital brinda atención médica de emergencia y traslado seguro de pacientes. Nuestro equipo de profesionales está disponible las 24 horas para brindar atención médica en el lugar de los hechos y trasladar a los pacientes al hospital cuando sea necesario.</p>
+    </div>
+    <%- include('partials/footer.html') %>
+</body>
+</html>
